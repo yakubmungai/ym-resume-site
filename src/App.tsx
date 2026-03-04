@@ -7,6 +7,8 @@ import { motion, useMotionValue, useSpring } from 'motion/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import pfpImage from '../images/pfp_black_bg.png';
+import headshotAIImage from '../images/headshot_ai.png';
+import kosmosImage from '../images/kosmos.png';
 
 function ParticleBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -351,20 +353,40 @@ function Hero() {
 }
 
 const PROJECTS = [
-  { id: 1, title: "AURA", category: "E-Commerce", description: "A seamless shopping experience built for the modern web with fluid transitions.", image: "https://picsum.photos/seed/aura/800/600" },
-  { id: 2, title: "NEXUS", category: "Fintech", description: "Next-generation banking interface with real-time analytics and data visualization.", image: "https://picsum.photos/seed/nexus/800/600" },
-  { id: 3, title: "VOID", category: "Editorial", description: "A minimalist publishing platform designed for digital creators and writers.", image: "https://picsum.photos/seed/void/800/600" },
-  { id: 4, title: "ECHO", category: "Web3", description: "Decentralized application dashboard with intuitive UX and smart contract integration.", image: "https://picsum.photos/seed/echo/800/600" },
+  {
+    id: 1,
+    title: "HeadshotAI",
+    category: "AI & Computer Vision",
+    description: "Professional AI-driven headshot generator using generative computer vision.",
+    details: "An AI-powered Discord bot that transforms casual user photos into polished professional headshots with clean white backgrounds and formal attire. It integrates Google Gemini AI to apply DSLR-quality lighting and enhance image clarity. The bot operates asynchronously within Discord threads, providing seamless and responsive photo processing. This project highlights my skills in Python, discord.py, async programming, and AI API integration.",
+    image: headshotAIImage,
+    href: "#"
+  },
+  {
+    id: 2,
+    title: "Project KOSMOS",
+    category: "AI & Aerospace",
+    description: "AI agents providing autonomous control and navigation for Kerbal Space Program.",
+    details: "Project KOSMOS is a multi-agent AI system for autonomous spacecraft mission control that converts natural language commands into formal mission plans. It includes agents that collaborate for optimal spacecraft operations and integrates with Kerbal Space Program via kRPC and MechJeb2 for advanced autopilot. This project showcases my skills in Python, multi-agent AI, LLM planning, and simulation integration.",
+    image: kosmosImage,
+    href: "https://github.com/cjohnson74/KOSMOS"
+  },
 ];
 
 function ProjectItem({ project, index }: { project: typeof PROJECTS[0], index: number, key?: React.Key }) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <motion.a
-      href="#"
+      href={project.href}
+      target="_blank"
+      rel="noopener noreferrer"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ type: "spring", stiffness: 100, damping: 20, delay: index * 0.1 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       className="group flex flex-col border border-white/10 bg-black/20 backdrop-blur-sm overflow-hidden hover:border-white/30 transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none"
     >
       <div className="relative aspect-[4/3] overflow-hidden border-b border-white/10">
@@ -389,9 +411,27 @@ function ProjectItem({ project, index }: { project: typeof PROJECTS[0], index: n
             <ArrowUpRight size={18} />
           </button>
         </div>
-        <p className="text-white/60 font-light leading-relaxed text-sm mt-auto">
-          {project.description}
-        </p>
+
+        <div className="relative overflow-hidden">
+          <p className="text-white/60 font-light leading-relaxed text-sm">
+            {project.description}
+          </p>
+
+          <motion.div
+            initial={{ height: 0, opacity: 0, marginTop: 0 }}
+            animate={{
+              height: isHovered ? "auto" : 0,
+              opacity: isHovered ? 1 : 0,
+              marginTop: isHovered ? 16 : 0
+            }}
+            transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+            className="overflow-hidden"
+          >
+            <p className="text-white/80 font-light leading-relaxed text-sm border-t border-white/5 pt-4">
+              {project.details}
+            </p>
+          </motion.div>
+        </div>
       </div>
     </motion.a>
   );
