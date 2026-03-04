@@ -19,6 +19,7 @@ function ParticleBackground() {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
+    let lastTime = performance.now();
 
     // Accessibility check: Do not animate if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -39,20 +40,22 @@ function ParticleBackground() {
       wanderStrength: number;
       wanderAngle: number;
       friction: number;
+      baseSpeed: number;
 
       constructor(width: number, height: number) {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 1;
-        this.vy = (Math.random() - 0.5) * 1;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
         this.length = Math.random() * 4 + 2;
         this.thickness = Math.random() * 1.5 + 0.5;
         this.color = colors[Math.floor(Math.random() * colors.length)];
-        this.angle = 0;
+        this.angle = Math.random() * Math.PI * 2;
 
-        this.wanderStrength = Math.random() * 0.015 + 0.005;
+        this.wanderStrength = Math.random() * 0.002 + 0.001;
         this.wanderAngle = Math.random() * Math.PI * 2;
-        this.friction = Math.random() * 0.02 + 0.96;
+        this.friction = 0.98;
+        this.baseSpeed = Math.random() * 0.2 + 0.1;
       }
 
       draw() {
@@ -67,52 +70,74 @@ function ParticleBackground() {
         ctx.restore();
       }
 
-      update(targetMouse: { x: number, y: number }, width: number, height: number) {
+      update(targetMouse: { x: number, y: number }, width: number, height: number, dt: number) {
+        // dt is normalization factor based on 60fps (16.67ms)
+        const timeScale = dt / 16.67;
+
         // Calculate distance FROM mouse TO particle for repulsion
         const dx = this.x - targetMouse.x;
         const dy = this.y - targetMouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+        const distSq = dx * dx + dy * dy;
+        const dist = Math.sqrt(distSq);
 
         let ax = 0;
         let ay = 0;
 
-        // Repel logic: push away if within a certain radius
-        const repelRadius = 50;
+        // Enhanced Repel logic: radius set to 100px (Restored)
+        const repelRadius = 100;
         if (dist < repelRadius && dist > 0) {
-          const force = (repelRadius - dist) / repelRadius; // 0 to 1, stronger closer to mouse
-          const repelStrength = 0.05;
+          const force = Math.pow((repelRadius - dist) / repelRadius, 1.5);
+          const repelStrength = 0.06 * timeScale;
           ax += (dx / dist) * force * repelStrength;
           ay += (dy / dist) * force * repelStrength;
         }
 
-        // Organic wandering
-        this.wanderAngle += (Math.random() - 0.5) * 0.1;
-        ax += Math.cos(this.wanderAngle) * this.wanderStrength;
-        ay += Math.sin(this.wanderAngle) * this.wanderStrength;
+        // Smoother wandering
+        this.wanderAngle += (Math.random() - 0.5) * 0.05 * timeScale;
+        ax += Math.cos(this.wanderAngle) * this.wanderStrength * timeScale;
+        ay += Math.sin(this.wanderAngle) * this.wanderStrength * timeScale;
 
+        // Apply forces
         this.vx += ax;
         this.vy += ay;
 
-        this.vx *= this.friction;
-        this.vy *= this.friction;
+        // Base drift to keep things moving
+        const currentSpeed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        if (currentSpeed < this.baseSpeed) {
+          const boost = (this.baseSpeed - currentSpeed) * 0.05 * timeScale;
+          this.vx += (this.vx / (currentSpeed || 1)) * boost;
+          this.vy += (this.vy / (currentSpeed || 1)) * boost;
+        }
 
-        this.x += this.vx;
-        this.y += this.vy;
+        // Apply friction (normalized by time)
+        const actualFriction = Math.pow(this.friction, timeScale);
+        this.vx *= actualFriction;
+        this.vy *= actualFriction;
 
-        // Wrap around screen to keep them scattered across the entire page
-        if (this.x < -20) this.x = width + 20;
-        if (this.x > width + 20) this.x = -20;
-        if (this.y < -20) this.y = height + 20;
-        if (this.y > height + 20) this.y = -20;
-
+        // Speed cap
+        const maxSpeed = 2.5;
         const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-        if (speed > 0.05) {
-          // Smoothly interpolate angle to avoid jitter
+        if (speed > maxSpeed) {
+          this.vx = (this.vx / speed) * maxSpeed;
+          this.vy = (this.vy / speed) * maxSpeed;
+        }
+
+        this.x += this.vx * timeScale;
+        this.y += this.vy * timeScale;
+
+        // Wrap around screen
+        const padding = 20;
+        if (this.x < -padding) this.x = width + padding;
+        if (this.x > width + padding) this.x = -padding;
+        if (this.y < -padding) this.y = height + padding;
+        if (this.y > height + padding) this.y = -padding;
+
+        if (speed > 0.01) {
           const targetAngle = Math.atan2(this.vy, this.vx);
           let diff = targetAngle - this.angle;
           while (diff < -Math.PI) diff += Math.PI * 2;
           while (diff > Math.PI) diff -= Math.PI * 2;
-          this.angle += diff * 0.1;
+          this.angle += diff * 0.1 * timeScale;
         }
       }
     }
@@ -121,13 +146,14 @@ function ParticleBackground() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       particles = [];
-      const numberOfParticles = Math.floor((canvas.width * canvas.height) / 8000);
+      const numberOfParticles = Math.floor((canvas.width * canvas.height) / 8500);
       for (let i = 0; i < numberOfParticles; i++) {
         particles.push(new Particle(canvas.width, canvas.height));
       }
     };
 
     let targetMouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    let currentMouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 
     const handleMouseMove = (e: MouseEvent) => {
       targetMouse.x = e.clientX;
@@ -143,17 +169,27 @@ function ParticleBackground() {
 
     init();
 
-    const animate = () => {
+    const animate = (time: number) => {
+      const dt = time - lastTime;
+      lastTime = time;
+
+      const effectiveDt = Math.min(dt, 100);
+      const timeScale = effectiveDt / 16.67;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Interpolate mouse for smoothness
+      currentMouse.x += (targetMouse.x - currentMouse.x) * 0.15 * timeScale;
+      currentMouse.y += (targetMouse.y - currentMouse.y) * 0.15 * timeScale;
+
       for (let i = 0; i < particles.length; i++) {
-        particles[i].update(targetMouse, canvas.width, canvas.height);
+        particles[i].update(currentMouse, canvas.width, canvas.height, effectiveDt);
         particles[i].draw();
       }
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animate();
+    animationFrameId = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
@@ -208,6 +244,13 @@ function MagneticButton({ children, className, onClick }: any) {
 }
 
 function Navigation() {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <motion.header
       initial={{ y: -100, opacity: 0 }}
@@ -215,7 +258,11 @@ function Navigation() {
       transition={{ type: "spring", stiffness: 100, damping: 20 }}
       className="fixed top-4 left-4 right-4 z-50 grid grid-cols-3 items-center px-6 py-4 rounded-xl backdrop-blur-md bg-white/5 border border-white/10"
     >
-      <div className="justify-self-start text-xl font-light tracking-widest text-white cursor-pointer select-none" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+      <div
+        onClick={scrollToTop}
+        className="justify-self-start text-xl font-light tracking-widest text-white cursor-pointer select-none"
+        style={{ fontFamily: "Space Grotesk, sans-serif" }}
+      >
         JJM.
       </div>
 
