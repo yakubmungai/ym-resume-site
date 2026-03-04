@@ -6,6 +6,7 @@
 import { motion, useMotionValue, useSpring } from 'motion/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import pfpImage from '../images/pfp_black_bg.png';
 
 function ParticleBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -18,7 +19,11 @@ function ParticleBackground() {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    
+
+    // Accessibility check: Do not animate if user prefers reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     const colors = ['#4285F4', '#EA4335', '#FBBC05', '#34A853', '#8A2BE2', '#F27D26'];
 
     class Particle {
@@ -30,7 +35,7 @@ function ParticleBackground() {
       thickness: number;
       color: string;
       angle: number;
-      
+
       wanderStrength: number;
       wanderAngle: number;
       friction: number;
@@ -44,7 +49,7 @@ function ParticleBackground() {
         this.thickness = Math.random() * 1.5 + 0.5;
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.angle = 0;
-        
+
         this.wanderStrength = Math.random() * 0.015 + 0.005;
         this.wanderAngle = Math.random() * Math.PI * 2;
         this.friction = Math.random() * 0.02 + 0.96;
@@ -67,10 +72,10 @@ function ParticleBackground() {
         const dx = this.x - targetMouse.x;
         const dy = this.y - targetMouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        
+
         let ax = 0;
         let ay = 0;
-        
+
         // Repel logic: push away if within a certain radius
         const repelRadius = 50;
         if (dist < repelRadius && dist > 0) {
@@ -79,27 +84,27 @@ function ParticleBackground() {
           ax += (dx / dist) * force * repelStrength;
           ay += (dy / dist) * force * repelStrength;
         }
-        
+
         // Organic wandering
         this.wanderAngle += (Math.random() - 0.5) * 0.1;
         ax += Math.cos(this.wanderAngle) * this.wanderStrength;
         ay += Math.sin(this.wanderAngle) * this.wanderStrength;
-        
+
         this.vx += ax;
         this.vy += ay;
-        
+
         this.vx *= this.friction;
         this.vy *= this.friction;
-        
+
         this.x += this.vx;
         this.y += this.vy;
-        
+
         // Wrap around screen to keep them scattered across the entire page
         if (this.x < -20) this.x = width + 20;
         if (this.x > width + 20) this.x = -20;
         if (this.y < -20) this.y = height + 20;
         if (this.y > height + 20) this.y = -20;
-        
+
         const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
         if (speed > 0.05) {
           // Smoothly interpolate angle to avoid jitter
@@ -116,7 +121,7 @@ function ParticleBackground() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       particles = [];
-      const numberOfParticles = Math.floor((canvas.width * canvas.height) / 8000); 
+      const numberOfParticles = Math.floor((canvas.width * canvas.height) / 8000);
       for (let i = 0; i < numberOfParticles; i++) {
         particles.push(new Particle(canvas.width, canvas.height));
       }
@@ -140,7 +145,7 @@ function ParticleBackground() {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
+
       for (let i = 0; i < particles.length; i++) {
         particles[i].update(targetMouse, canvas.width, canvas.height);
         particles[i].draw();
@@ -194,7 +199,7 @@ function MagneticButton({ children, className, onClick }: any) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ x: mouseXSpring, y: mouseYSpring }}
-      className={`relative flex items-center justify-center rounded-full bg-white text-black font-medium tracking-tight overflow-hidden ${className}`}
+      className={`relative flex items-center justify-center rounded-full bg-white text-black font-medium tracking-tight overflow-hidden hover:bg-white/80 hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-300 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none ${className}`}
       onClick={onClick}
     >
       <span className="relative z-10">{children}</span>
@@ -208,45 +213,57 @@ function Navigation() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 100, damping: 20 }}
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-12 md:py-6 backdrop-blur-md bg-black/50 border-b border-white/10"
+      className="fixed top-4 left-4 right-4 z-50 grid grid-cols-3 items-center px-6 py-4 rounded-xl backdrop-blur-md bg-white/5 border border-white/10"
     >
-      <div className="text-sm font-semibold tracking-widest uppercase">
-        Studio
+      <div className="justify-self-start text-xl font-light tracking-widest text-white cursor-pointer select-none" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+        JJM.
       </div>
-      <nav className="flex items-center gap-8 text-sm font-medium tracking-wide">
-        <a href="#projects" className="hover:opacity-70 transition-opacity">Projects</a>
-        <a href="#contact" className="hover:opacity-70 transition-opacity">Contact</a>
+
+      <nav className="justify-self-center flex items-center gap-8 text-sm font-medium tracking-wide">
+        <a href="#projects" className="hover:opacity-70 transition-opacity focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none rounded">Projects</a>
+        <a href="#about" className="hover:opacity-70 transition-opacity focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none rounded">About</a>
       </nav>
+
+      <div className="justify-self-end">
+        <a
+          href="#contact"
+          className="px-5 py-2 text-xs font-semibold uppercase tracking-wider bg-white text-black rounded-full hover:bg-white/80 hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-300 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none inline-block"
+        >
+          Get in touch
+        </a>
+      </div>
     </motion.header>
   );
 }
 
 function Hero() {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center pt-24 px-6 md:px-12 max-w-4xl mx-auto text-center">
+    <section className="min-h-screen flex flex-col items-center justify-center pt-24 px-6 md:px-12 w-full max-w-6xl mx-auto text-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.1 }}
         className="mb-8"
       >
-        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border border-white/10 grayscale mx-auto">
-          <img 
-            src="https://picsum.photos/seed/portrait/800/800" 
-            alt="Profile" 
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
+        <div className="w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden border border-white/10 mx-auto">
+          <img
+            src={pfpImage}
+            alt="Profile"
+            className="w-full h-full object-cover scale-[1.4] translate-y-[20%]"
           />
         </div>
       </motion.div>
-      
+
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
-        className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight mb-6"
+        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-tight mb-6"
       >
-        CRAFTING DIGITAL REALITIES.
+        <span className="whitespace-nowrap">Hi! I'm Jacob J Mungai</span>
+        <span className="block mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white/80 whitespace-normal">
+          Aspiring Software Engineer
+        </span>
       </motion.h1>
 
       <motion.p
@@ -255,9 +272,11 @@ function Hero() {
         transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.3 }}
         className="text-lg md:text-xl font-light text-white/70 max-w-2xl mx-auto mb-10"
       >
-        I am a multidisciplinary designer and engineer focused on creating weightless, industrial minimalist interfaces. I believe in the power of negative space and the precision of a single pixel.
+        I'm a New Grad CS major (Fall 2025 @ UFlorida). I've worked with Python, C++, Java,
+        SvelteKit, TailwindCSS, SQL, MATLAB, SFML, and Pygame. Currently looking for full-time
+        SWE & Business Analyst roles!
       </motion.p>
-      
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -268,8 +287,8 @@ function Hero() {
           Get in touch
         </MagneticButton>
       </motion.div>
-      
-      <motion.div 
+
+      <motion.div
         initial={{ opacity: 0, scaleX: 0 }}
         animate={{ opacity: 1, scaleX: 1 }}
         transition={{ type: "spring", stiffness: 50, damping: 20, delay: 0.6 }}
@@ -288,18 +307,19 @@ const PROJECTS = [
 
 function ProjectItem({ project, index }: { project: typeof PROJECTS[0], index: number, key?: React.Key }) {
   return (
-    <motion.div
+    <motion.a
+      href="#"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ type: "spring", stiffness: 100, damping: 20, delay: index * 0.1 }}
-      className="group flex flex-col border border-white/10 bg-black/20 backdrop-blur-sm overflow-hidden hover:border-white/30 transition-colors duration-500"
+      className="group flex flex-col border border-white/10 bg-black/20 backdrop-blur-sm overflow-hidden hover:border-white/30 transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none"
     >
       <div className="relative aspect-[4/3] overflow-hidden border-b border-white/10">
-        <img 
-          src={project.image} 
+        <img
+          src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover grayscale opacity-70 group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700"
+          className="w-full h-full object-cover grayscale opacity-70 group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500"
           referrerPolicy="no-referrer"
         />
       </div>
@@ -321,7 +341,7 @@ function ProjectItem({ project, index }: { project: typeof PROJECTS[0], index: n
           {project.description}
         </p>
       </div>
-    </motion.div>
+    </motion.a>
   );
 }
 
@@ -329,7 +349,7 @@ function Projects() {
   return (
     <section id="projects" className="py-32 px-6 md:px-12 max-w-5xl mx-auto">
       <div className="mb-16 text-center">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -339,12 +359,45 @@ function Projects() {
           01 / Projects
         </motion.h2>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {PROJECTS.map((project, index) => (
           <ProjectItem key={project.id} project={project} index={index} />
         ))}
       </div>
+    </section>
+  );
+}
+
+function About() {
+  return (
+    <section id="about" className="py-32 px-6 md:px-12 max-w-5xl mx-auto border-t border-white/10">
+      <div className="mb-16 text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ type: "spring", stiffness: 100, damping: 20 }}
+          className="text-sm font-semibold tracking-widest uppercase opacity-50"
+        >
+          02 / About Me
+        </motion.h2>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
+        className="space-y-8 text-lg md:text-xl font-light text-white/70 leading-relaxed"
+      >
+        <p>
+          I'm originally from Tanzania and came to the U.S. as a UWC Davis Scholar at the University of Florida. Navigating that transition on my own solidified a core belief I bring to my career: "luck" is simply the result of showing up every day with curiosity and grit. I don't wait for the right moment to appear; I prefer to build it through consistency and a relentless work ethic.
+        </p>
+        <p>
+          Outside of the professional grind, I'm a big sports fan. Whether I'm analyzing the strategy of a UFC card, watching the NBA, or competing in NBA2K, I'm drawn to the discipline it takes to win. I'm also a self-proclaimed foodie with a very specific weakness—if there's a ribeye or lobster mac and cheese on the menu, I'm there. Ultimately, I carry that same appetite for excellence into every project I touch.
+        </p>
+      </motion.div>
     </section>
   );
 }
@@ -356,9 +409,9 @@ function Footer() {
         © {new Date().getFullYear()} Studio
       </div>
       <div className="flex items-center gap-6 text-sm font-medium tracking-wide opacity-50">
-        <a href="#" className="hover:opacity-100 transition-opacity">Twitter</a>
-        <a href="#" className="hover:opacity-100 transition-opacity">LinkedIn</a>
-        <a href="#" className="hover:opacity-100 transition-opacity">GitHub</a>
+        <a href="#" className="hover:opacity-100 transition-opacity focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none rounded">Twitter</a>
+        <a href="#" className="hover:opacity-100 transition-opacity focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none rounded">LinkedIn</a>
+        <a href="#" className="hover:opacity-100 transition-opacity focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none rounded">GitHub</a>
       </div>
     </footer>
   );
@@ -372,6 +425,7 @@ export default function App() {
       <main className="relative z-10">
         <Hero />
         <Projects />
+        <About />
       </main>
       <Footer />
     </div>
