@@ -273,7 +273,9 @@ function Navigation() {
 
       <div className="justify-self-end">
         <a
-          href="#contact"
+          href="https://www.linkedin.com/in/yakubjmungai/"
+          target="_blank"
+          rel="noopener noreferrer"
           className="px-5 py-2 text-xs font-semibold uppercase tracking-wider bg-white text-black rounded-full hover:bg-white/80 hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-300 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none inline-block"
         >
           Get in touch
@@ -330,7 +332,10 @@ function Hero() {
         transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.4 }}
         className="mb-24"
       >
-        <MagneticButton className="px-8 py-4 text-base">
+        <MagneticButton
+          className="px-8 py-4 text-base"
+          onClick={() => window.open('https://www.linkedin.com/in/yakubjmungai/', '_blank', 'noopener,noreferrer')}
+        >
           Get in touch
         </MagneticButton>
       </motion.div>
@@ -457,7 +462,14 @@ function Footer() {
       </div>
       <div className="flex items-center gap-6 text-sm font-medium tracking-wide opacity-50">
         <a href="#" className="hover:opacity-100 transition-opacity focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none rounded">Twitter</a>
-        <a href="#" className="hover:opacity-100 transition-opacity focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none rounded">LinkedIn</a>
+        <a
+          href="https://www.linkedin.com/in/yakubjmungai/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:opacity-100 transition-opacity focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none rounded"
+        >
+          LinkedIn
+        </a>
         <a href="#" className="hover:opacity-100 transition-opacity focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none rounded">GitHub</a>
       </div>
     </footer>
