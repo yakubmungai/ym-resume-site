@@ -167,7 +167,14 @@ function ParticleBackground() {
       targetMouse.y = e.clientY;
     };
 
+    let lastWindowWidth = window.innerWidth;
+
     const handleResize = () => {
+      // On mobile, ignore height-only changes (like scrolling up/down)
+      if (isMobile && window.innerWidth === lastWindowWidth) {
+        return;
+      }
+      lastWindowWidth = window.innerWidth;
       init();
     };
 
