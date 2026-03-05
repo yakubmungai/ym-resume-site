@@ -273,22 +273,22 @@ function Navigation() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 100, damping: 20 }}
-      className="fixed top-4 left-4 right-4 z-50 grid grid-cols-3 items-center px-6 py-4 rounded-xl backdrop-blur-md bg-white/5 border border-white/10"
+      className="fixed top-4 left-4 right-4 z-50 flex justify-between items-center px-6 py-4 rounded-xl backdrop-blur-md bg-white/5 border border-white/10"
     >
       <div
         onClick={scrollToTop}
-        className="justify-self-start text-xl font-light tracking-widest text-white cursor-pointer select-none"
+        className="text-xl font-light tracking-widest text-white cursor-pointer select-none"
         style={{ fontFamily: "Space Grotesk, sans-serif" }}
       >
         JJM.
       </div>
 
-      <nav className="justify-self-center flex items-center gap-8 text-sm font-medium tracking-wide">
+      <nav className="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
         <a href="#projects" className="hover:opacity-70 transition-opacity focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none rounded">Projects</a>
         <a href="#about" className="hover:opacity-70 transition-opacity focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none rounded">About</a>
       </nav>
 
-      <div className="justify-self-end">
+      <div>
         <a
           href="https://www.linkedin.com/in/yakubjmungai/"
           target="_blank"
