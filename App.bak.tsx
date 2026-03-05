@@ -270,7 +270,7 @@ function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.3 }}
-        className="text-lg md:text-xl font-light text-white/70 max-w-2xl mx-auto mb-10"
+        className="text-lg md:text-xl font-light text-white/80 max-w-2xl mx-auto mb-10"
       >
         I'm a New Grad CS major (Fall 2025 @ UFlorida). I've worked with Python, C++, Java,
         SvelteKit, TailwindCSS, SQL, MATLAB, SFML, and Pygame. Currently looking for full-time
@@ -389,7 +389,7 @@ function About() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
-        className="space-y-8 text-lg md:text-xl font-light text-white/70 leading-relaxed"
+        className="space-y-8 text-lg md:text-xl font-light text-white/80 leading-relaxed"
       >
         <p>
           I'm originally from Tanzania and came to the U.S. as a UWC Davis Scholar at the University of Florida. Navigating that transition on my own solidified a core belief I bring to my career: "luck" is simply the result of showing up every day with curiosity and grit. I don't wait for the right moment to appear; I prefer to build it through consistency and a relentless work ethic.

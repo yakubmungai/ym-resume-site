@@ -8,7 +8,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import pfpImage from '../images/pfp_black_bg.png';
 import headshotAIImage from '../images/headshot_ai.png';
-import kosmosImage from '../images/kosmos.png';
+import kosmosImage from '../images/kosmos_launch.png';
+import alexgAutomatorImage from '../images/alexg_automator.png';
 
 function ParticleBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -148,7 +149,7 @@ function ParticleBackground() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       particles = [];
-      const numberOfParticles = Math.floor((canvas.width * canvas.height) / 8500);
+      const numberOfParticles = Math.floor((canvas.width * canvas.height) / 4000);
       for (let i = 0; i < numberOfParticles; i++) {
         particles.push(new Particle(canvas.width, canvas.height));
       }
@@ -371,6 +372,15 @@ const PROJECTS = [
     image: kosmosImage,
     href: "https://github.com/cjohnson74/KOSMOS"
   },
+  {
+    id: 3,
+    title: "AlexG Automator",
+    category: "FinTech & Automation",
+    description: "A Python-based algorithmic trading system that automates the 'Set and Forget' strategy.",
+    details: "A Python-based algorithmic trading system that automates the 'Set and Forget' strategy using a weighted probability scorecard. This project integrates with MetaTrader 5 to analyze market structure, identify zones, and execute trades based on a strict confluence score. It features automated risk management and real-time market analysis.",
+    image: alexgAutomatorImage,
+    href: "https://github.com/yakubmungai/fx-alex"
+  },
 ];
 
 function ProjectItem({ project, index }: { project: typeof PROJECTS[0], index: number, key?: React.Key }) {
@@ -397,13 +407,13 @@ function ProjectItem({ project, index }: { project: typeof PROJECTS[0], index: n
           referrerPolicy="no-referrer"
         />
       </div>
-      <div className="p-8 flex flex-col flex-grow">
-        <div className="flex justify-between items-start mb-6">
+      <div className="p-6 flex flex-col flex-grow">
+        <div className="flex justify-between items-start mb-4">
           <div>
             <div className="text-xs font-semibold tracking-widest uppercase opacity-50 mb-2">
               {project.category}
             </div>
-            <h3 className="text-2xl font-bold tracking-tight">
+            <h3 className="text-xl font-bold tracking-tight">
               {project.title}
             </h3>
           </div>
@@ -439,7 +449,7 @@ function ProjectItem({ project, index }: { project: typeof PROJECTS[0], index: n
 
 function Projects() {
   return (
-    <section id="projects" className="py-32 px-6 md:px-12 max-w-5xl mx-auto">
+    <section id="projects" className="py-32 px-6 md:px-12 max-w-6xl mx-auto">
       <div className="mb-16 text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -452,7 +462,7 @@ function Projects() {
         </motion.h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {PROJECTS.map((project, index) => (
           <ProjectItem key={project.id} project={project} index={index} />
         ))}
