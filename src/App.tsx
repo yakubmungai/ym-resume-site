@@ -210,7 +210,8 @@ function ParticleBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-80 touch-none"
+      className="fixed inset-0 pointer-events-none z-0 opacity-80 touch-none transform-gpu"
+      style={{ willChange: 'transform' }}
     />
   );
 }
@@ -535,14 +536,18 @@ function Footer() {
 export default function App() {
   return (
     <div className="bg-black text-white min-h-screen selection:bg-white selection:text-black font-sans relative overflow-x-hidden w-full">
-      <ParticleBackground />
-      <Navigation />
-      <main className="relative z-10">
-        <Hero />
-        <Projects />
-        <About />
-      </main>
-      <Footer />
+      <div className="fixed inset-0 z-0">
+        <ParticleBackground />
+      </div>
+      <div className="relative z-10 w-full">
+        <Navigation />
+        <main>
+          <Hero />
+          <Projects />
+          <About />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }
