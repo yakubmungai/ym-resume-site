@@ -416,7 +416,7 @@ function ProjectItem({ project, index }: { project: typeof PROJECTS[0], index: n
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover grayscale opacity-70 group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500"
+          className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
           referrerPolicy="no-referrer"
         />
       </div>
