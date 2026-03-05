@@ -376,7 +376,7 @@ const PROJECTS = [
     description: "Professional AI-driven headshot generator using generative computer vision.",
     details: "An AI-powered Discord bot that transforms casual user photos into polished professional headshots with clean white backgrounds and formal attire. It integrates Google Gemini AI to apply DSLR-quality lighting and enhance image clarity. The bot operates asynchronously within Discord threads, providing seamless and responsive photo processing. This project highlights my skills in Python, discord.py, async programming, and AI API integration.",
     image: headshotAIImage,
-    href: "#"
+    href: "https://github.com/yakubmungai/Discord-Headshot-Bot"
   },
   {
     id: 2,
@@ -527,7 +527,7 @@ function Footer() {
   return (
     <footer id="contact" className="py-12 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
       <div className="text-sm font-semibold tracking-widest uppercase opacity-50">
-        © {new Date().getFullYear()} Studio
+        © {new Date().getFullYear()} Yakub (Jacob) Joseph Mungai
       </div>
       <div className="flex items-center gap-6 text-sm font-medium tracking-wide opacity-50">
         <a
