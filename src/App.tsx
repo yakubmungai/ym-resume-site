@@ -327,6 +327,7 @@ function Hero() {
         className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-tight mb-6"
       >
         <span className="whitespace-nowrap">Hi! I'm Jacob J Mungai</span>
+        <span className="sr-only">Also known as Yakub Joseph Mungai, Jacob Joseph Mungai, and Jacob JJ Mungai.</span>
         <span className="block mt-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white/80 whitespace-normal">
           Aspiring Software Engineer
         </span>
