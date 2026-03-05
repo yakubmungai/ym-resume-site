@@ -401,17 +401,15 @@ function ProjectItem({ project, index }: { project: typeof PROJECTS[0], index: n
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <motion.a
-      href={project.href}
-      target="_blank"
-      rel="noopener noreferrer"
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ type: "spring", stiffness: 100, damping: 20, delay: index * 0.1 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group flex flex-col border border-white/10 bg-black/20 backdrop-blur-sm overflow-hidden hover:border-white/30 transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none"
+      onClick={() => setIsHovered(!isHovered)}
+      className="group flex flex-col border border-white/10 bg-black/20 backdrop-blur-sm overflow-hidden hover:border-white/30 transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none cursor-pointer"
     >
       <div className="relative aspect-[4/3] overflow-hidden border-b border-white/10">
         <img
@@ -431,9 +429,15 @@ function ProjectItem({ project, index }: { project: typeof PROJECTS[0], index: n
               {project.title}
             </h3>
           </div>
-          <button className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors duration-300 shrink-0 ml-4 cursor-pointer">
+          <a
+            href={project.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-colors duration-300 shrink-0 ml-4 cursor-pointer z-10"
+          >
             <ArrowUpRight size={18} />
-          </button>
+          </a>
         </div>
 
         <div className="relative overflow-hidden">
@@ -457,7 +461,7 @@ function ProjectItem({ project, index }: { project: typeof PROJECTS[0], index: n
           </motion.div>
         </div>
       </div>
-    </motion.a>
+    </motion.div>
   );
 }
 
@@ -525,7 +529,6 @@ function Footer() {
         © {new Date().getFullYear()} Studio
       </div>
       <div className="flex items-center gap-6 text-sm font-medium tracking-wide opacity-50">
-        <a href="#" className="hover:opacity-100 transition-opacity focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none rounded">Twitter</a>
         <a
           href="https://www.linkedin.com/in/yakubjmungai/"
           target="_blank"
@@ -534,7 +537,14 @@ function Footer() {
         >
           LinkedIn
         </a>
-        <a href="#" className="hover:opacity-100 transition-opacity focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none rounded">GitHub</a>
+        <a
+          href="https://github.com/yakubmungai"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:opacity-100 transition-opacity focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:outline-none rounded"
+        >
+          GitHub
+        </a>
       </div>
     </footer>
   );
