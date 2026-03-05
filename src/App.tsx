@@ -23,6 +23,7 @@ function ParticleBackground() {
     let animationFrameId: number;
     let particles: Particle[] = [];
     let lastTime = performance.now();
+    let isMobile = false;
 
     // Accessibility check: Do not animate if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -77,22 +78,24 @@ function ParticleBackground() {
         // dt is normalization factor based on 60fps (16.67ms)
         const timeScale = dt / 16.67;
 
-        // Calculate distance FROM mouse TO particle for repulsion
-        const dx = this.x - targetMouse.x;
-        const dy = this.y - targetMouse.y;
-        const distSq = dx * dx + dy * dy;
-        const dist = Math.sqrt(distSq);
-
         let ax = 0;
         let ay = 0;
 
-        // Enhanced Repel logic: radius set to 100px (Restored)
-        const repelRadius = 100;
-        if (dist < repelRadius && dist > 0) {
-          const force = Math.pow((repelRadius - dist) / repelRadius, 1.5);
-          const repelStrength = 0.06 * timeScale;
-          ax += (dx / dist) * force * repelStrength;
-          ay += (dy / dist) * force * repelStrength;
+        // Enhanced Repel logic: radius set to 100px (Disabled on Mobile)
+        if (!isMobile) {
+          // Calculate distance FROM mouse TO particle for repulsion
+          const dx = this.x - targetMouse.x;
+          const dy = this.y - targetMouse.y;
+          const distSq = dx * dx + dy * dy;
+          const dist = Math.sqrt(distSq);
+
+          const repelRadius = 100;
+          if (dist < repelRadius && dist > 0) {
+            const force = Math.pow((repelRadius - dist) / repelRadius, 1.5);
+            const repelStrength = 0.06 * timeScale;
+            ax += (dx / dist) * force * repelStrength;
+            ay += (dy / dist) * force * repelStrength;
+          }
         }
 
         // Smoother wandering
@@ -146,6 +149,7 @@ function ParticleBackground() {
     }
 
     const init = () => {
+      isMobile = window.matchMedia('(max-width: 768px)').matches;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       particles = [];
@@ -181,9 +185,11 @@ function ParticleBackground() {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Interpolate mouse for smoothness
-      currentMouse.x += (targetMouse.x - currentMouse.x) * 0.15 * timeScale;
-      currentMouse.y += (targetMouse.y - currentMouse.y) * 0.15 * timeScale;
+      // Interpolate mouse for smoothness (Skip if mobile)
+      if (!isMobile) {
+        currentMouse.x += (targetMouse.x - currentMouse.x) * 0.15 * timeScale;
+        currentMouse.y += (targetMouse.y - currentMouse.y) * 0.15 * timeScale;
+      }
 
       for (let i = 0; i < particles.length; i++) {
         particles[i].update(currentMouse, canvas.width, canvas.height, effectiveDt);
