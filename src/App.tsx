@@ -210,7 +210,7 @@ function ParticleBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-80"
+      className="fixed inset-0 pointer-events-none z-0 opacity-80 touch-none"
     />
   );
 }
@@ -534,7 +534,7 @@ function Footer() {
 
 export default function App() {
   return (
-    <div className="bg-black text-white min-h-screen selection:bg-white selection:text-black font-sans relative">
+    <div className="bg-black text-white min-h-screen selection:bg-white selection:text-black font-sans relative overflow-x-hidden w-full">
       <ParticleBackground />
       <Navigation />
       <main className="relative z-10">
