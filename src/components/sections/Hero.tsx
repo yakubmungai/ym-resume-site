@@ -100,10 +100,10 @@ export function Hero() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="flex-grow overflow-hidden flex items-center justify-center pointer-events-none select-none relative"
+          className="flex-grow overflow-hidden flex items-center justify-center pointer-events-none select-none relative scale-125 md:scale-150 origin-bottom"
           style={{
-            maskImage: 'linear-gradient(to bottom, black 90%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, black 90%, transparent 100%)'
+            maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)'
           }}
         >
           <img
@@ -115,15 +115,15 @@ export function Hero() {
 
         {/* Minimal Info overlay/caption - Centered */}
         <div className="mt-8 space-y-3 px-2 flex flex-col items-center">
-          <div className="flex items-center gap-2 text-white/40 hover:text-white/70 transition-colors">
+          <div className="flex items-center gap-2 text-white/30">
             <GraduationCap size={14} />
             <span className="text-[10px] font-bold uppercase tracking-[0.2em]">{PERSONAL_INFO.university} CS '25</span>
           </div>
-          <div className="flex items-center gap-2 text-white/40 hover:text-white/70 transition-colors">
+          <div className="flex items-center gap-2 text-white/30">
             <Laptop size={14} />
             <span className="text-[10px] font-bold uppercase tracking-[0.2em]">C++ · Python · SQL</span>
           </div>
-          <div className="flex items-center gap-2 text-white/40 hover:text-white/70 transition-colors">
+          <div className="flex items-center gap-2 text-white/30">
             <Award size={14} />
             <span className="text-[10px] font-bold uppercase tracking-[0.2em]">UWC Davis Scholar</span>
           </div>

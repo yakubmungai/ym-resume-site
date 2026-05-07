@@ -30,7 +30,7 @@ export function About() {
           {SKILLS.map((skill, i) => (
             <div 
               key={i} 
-              className="px-4 py-2 rounded-xl bg-white/[0.03] border border-white/[0.08] text-[11px] font-medium text-white/50 hover:text-white hover:border-white/20 transition-all"
+              className="px-4 py-2 rounded-xl bg-white/[0.03] border border-white/[0.08] text-[11px] font-medium text-white/40"
             >
               {skill}
             </div>
