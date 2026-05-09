@@ -145,14 +145,14 @@ export function Hero() {
           viewport={{ once: true }}
           className="flex-grow overflow-hidden flex items-center justify-center pointer-events-none select-none relative scale-110 md:origin-bottom origin-center"
           style={{
-            maskImage: 'linear-gradient(to bottom, black 95%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, black 95%, transparent 100%)'
+            maskImage: 'radial-gradient(circle at center, black 40%, transparent 90%)',
+            WebkitMaskImage: 'radial-gradient(circle at center, black 40%, transparent 90%)'
           }}
         >
           <img
             src={pfpImage}
             alt="Jacob J. Mungai"
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain mix-blend-screen brightness-110"
           />
         </motion.div>
 
