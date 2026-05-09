@@ -12,6 +12,11 @@ export function BentoCard({ children, className, delay = 0 }: BentoCardProps) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ 
+        y: -4,
+        scale: 1.01,
+        transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
+      }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
       className={cn("bento-card group", className)}

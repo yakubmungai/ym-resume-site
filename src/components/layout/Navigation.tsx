@@ -9,8 +9,9 @@ export function Navigation() {
 
   return (
     <motion.header
-      initial={{ y: -100, opacity: 0 }}
+      initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex flex-col md:flex-row items-center gap-2 px-3 py-2 rounded-3xl md:rounded-full glass w-[calc(100%-2rem)] md:w-auto"
     >
       <div className="flex items-center justify-between w-full md:w-auto gap-2">
@@ -29,7 +30,6 @@ export function Navigation() {
           {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
 
-        <div className="md:hidden w-[1px] h-4 bg-white/20" />
         <div className="hidden md:block w-[1px] h-4 bg-white/20 mx-1" />
         <div className="flex items-center gap-2 relative">
           <div className="relative">

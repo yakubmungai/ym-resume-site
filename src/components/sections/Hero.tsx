@@ -17,34 +17,74 @@ export function Hero() {
         </div>
         <div className="relative z-10 space-y-8 pt-12">
 
-          <div className="space-y-4">
-            <div>
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.1,
+                  delayChildren: 0.2
+                }
+              }
+            }}
+            className="space-y-4"
+          >
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+              }}
+            >
               <h1 className="text-4xl sm:text-5xl md:text-8xl font-bold font-display tracking-tighter leading-[0.9]">
                 {PERSONAL_INFO.name}
               </h1>
-            </div>
-            <h2 className="text-xl md:text-2xl text-accent font-bold font-display tracking-tight">
+            </motion.div>
+            <motion.h2 
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+              }}
+              className="text-xl md:text-2xl text-accent font-bold font-display tracking-tight"
+            >
               {PERSONAL_INFO.role}
-            </h2>
-            <p className="text-sm md:text-lg text-white/60 font-light max-w-xl leading-relaxed">
+            </motion.h2>
+            <motion.p 
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+              }}
+              className="text-sm md:text-lg text-white/60 font-light max-w-xl leading-relaxed"
+            >
               {PERSONAL_INFO.intro}
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="flex flex-wrap gap-4 pt-4">
-            <a
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-wrap gap-4 pt-4"
+          >
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               href={`mailto:${PERSONAL_INFO.email}`}
               className="px-8 py-4 bg-white text-black font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white/90 transition-all shadow-[0_0_30px_rgba(255,255,255,0.15)] inline-block"
             >
               Get in touch
-            </a>
+            </motion.a>
             <div className="relative">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setIsResumeOpen(!isResumeOpen)}
                 className="flex items-center gap-2 px-8 py-4 bg-white/5 text-white font-bold uppercase tracking-widest text-xs rounded-full border border-white/10 hover:bg-white/10 transition-all"
               >
                 View Resume <ChevronDown size={14} className={`transition-transform duration-300 ${isResumeOpen ? 'rotate-180' : ''}`} />
-              </button>
+              </motion.button>
 
               <AnimatePresence>
                 {isResumeOpen && (
@@ -88,7 +128,7 @@ export function Hero() {
                 )}
               </AnimatePresence>
             </div>
-          </div>
+          </motion.div>
         </div>
 
       </BentoCard>
@@ -98,8 +138,19 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
+          animate={{ 
+            y: [0, -10, 0],
+          }}
+          transition={{ 
+            y: {
+              duration: 6, 
+              repeat: Infinity, 
+              ease: "easeInOut"
+            },
+            opacity: { duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] },
+            scale: { duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }
+          }}
           viewport={{ once: true }}
-          transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="flex-grow overflow-hidden flex items-center justify-center pointer-events-none select-none relative scale-110 md:origin-bottom origin-center"
           style={{
             maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
@@ -114,7 +165,12 @@ export function Hero() {
         </motion.div>
 
         {/* Minimal Info overlay/caption - Centered */}
-        <div className="mt-8 space-y-3 px-2 flex flex-col items-center">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+          className="mt-8 space-y-3 px-2 flex flex-col items-center"
+        >
           <div className="flex items-center gap-2 text-white/40 select-none">
             <GraduationCap size={14} />
             <span className="text-[10px] font-bold uppercase tracking-[0.2em]">{PERSONAL_INFO.university} CS '25</span>
@@ -140,7 +196,7 @@ export function Hero() {
               <Mail size={18} className="group-hover:scale-110 transition-transform" />
             </a>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

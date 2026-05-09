@@ -6,11 +6,23 @@ import { WEB_SHOWCASE, PERSONAL_INFO } from '../../data/portfolio';
 export function WebSolutions() {
   return (
     <section id="web" className="space-y-8 pt-12">
-      <div className="flex items-center gap-4">
+      <motion.div 
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="flex items-center gap-4"
+      >
         <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight uppercase">Web Solutions</h2>
-        <div className="flex-grow h-[1px] bg-white/5" />
+        <motion.div 
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="flex-grow h-[1px] bg-white/5 origin-left" 
+        />
         <span className="text-[10px] font-bold opacity-20 tracking-widest">SECTION 02</span>
-      </div>
+      </motion.div>
 
       {/* The Service Promo Card - Full Width Header */}
       <BentoCard className="p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 bg-accent/5 border-accent/20" delay={0.2}>
@@ -76,7 +88,7 @@ export function WebSolutions() {
 
                 {/* Visit Site Overlay */}
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                  <div className="flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-bold uppercase tracking-[0.2em] text-[10px] translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                  <div className="flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-bold uppercase tracking-[0.2em] text-[10px] translate-y-4 group-hover:translate-y-0 group-hover:bg-accent group-hover:text-black transition-all duration-500">
                     Visit Site <ExternalLink size={14} />
                   </div>
                 </div>
@@ -89,9 +101,6 @@ export function WebSolutions() {
                     <ExternalLink size={14} className="opacity-20 group-hover:opacity-100 group-hover:text-accent transition-all" />
                   </div>
                   <p className="text-white/40 text-[12px] font-light mb-4 line-clamp-2 leading-relaxed">{project.description}</p>
-                </div>
-                <div className="flex items-center gap-3 text-[9px] font-bold uppercase tracking-widest text-accent/40 group-hover:text-accent transition-colors">
-                  Engineering Depth <div className="w-3 h-[1px] bg-accent/40 group-hover:bg-accent group-hover:w-8 transition-all" />
                 </div>
               </div>
             </BentoCard>
