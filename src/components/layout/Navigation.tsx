@@ -25,6 +25,7 @@ export function Navigation() {
         {/* Mobile Menu Button */}
         <button 
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           className="md:hidden p-2 hover:bg-white/10 rounded-full transition-colors"
         >
           {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -88,8 +89,8 @@ export function Navigation() {
           </div>
 
           <a
-            href={PERSONAL_INFO.links.linkedin}
-            target="_blank"
+            href="#contact"
+            aria-label="Hire Me"
             className="px-4 py-1.5 text-[13px] font-semibold bg-white text-black rounded-full hover:bg-white/90 transition-all shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_25px_rgba(255,255,255,0.25)] hover:scale-105 active:scale-95 shrink-0"
           >
             Hire Me

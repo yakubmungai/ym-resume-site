@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { ArrowRight } from 'lucide-react';
 import { BentoCard } from '../ui/BentoCard';
 import { PERSONAL_INFO, SKILLS } from '../../data/portfolio';
 
@@ -55,14 +56,14 @@ export function About() {
         </div>
       </BentoCard>
 
-      <BentoCard className="md:col-span-1 p-12 flex flex-col justify-end relative overflow-hidden" delay={0.5}>
+      <BentoCard id="contact" className="md:col-span-1 p-12 flex flex-col justify-end relative overflow-hidden" delay={0.5}>
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/5 to-transparent opacity-50" />
         <div className="relative z-10 space-y-4">
-          <h3 className="text-5xl font-bold font-display tracking-tighter italic opacity-10">2026</h3>
-          <p className="text-white/40 text-sm font-light uppercase tracking-widest">Available for full-time software engineering or business analyst roles</p>
+          <h3 className="text-5xl font-bold font-display tracking-tighter italic opacity-10 leading-none">2026</h3>
+          <p className="text-white/40 text-[11px] font-bold uppercase tracking-widest leading-relaxed">Seeking full-time roles & freelance opportunities</p>
           <div className="pt-4">
-            <a href={`mailto:${PERSONAL_INFO.email}`} className="text-xl font-bold font-display hover:text-accent transition-colors underline underline-offset-8 decoration-white/10">
-              Get in touch
+            <a href={`mailto:${PERSONAL_INFO.email}`} className="group inline-flex items-center gap-2 text-xl font-bold font-display hover:text-accent transition-colors underline underline-offset-8 decoration-white/10">
+              Get in touch <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
             </a>
           </div>
         </div>

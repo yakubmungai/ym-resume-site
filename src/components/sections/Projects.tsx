@@ -47,6 +47,8 @@ export function Projects() {
                     whileTap={{ scale: 0.9 }}
                     href={project.href} 
                     target="_blank" 
+                    rel="noopener noreferrer"
+                    aria-label={`View ${project.title} on GitHub`}
                     className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all shrink-0"
                   >
                     <ArrowUpRight size={14} />

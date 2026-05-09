@@ -37,12 +37,14 @@ export function WebSolutions() {
             </p>
           </div>
         </div>
-        <a 
+        <motion.a 
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           href={`mailto:${PERSONAL_INFO.email}`}
           className="group flex items-center gap-3 px-8 py-4 bg-accent text-black font-bold uppercase tracking-[0.2em] text-[12px] rounded-xl hover:bg-accent/90 transition-all shrink-0"
         >
           Get Started <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
-        </a>
+        </motion.a>
       </BentoCard>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -53,8 +55,10 @@ export function WebSolutions() {
             href={project.href}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`Visit ${project.title} website`}
             className="group block"
             whileHover={{ y: -5 }}
+            whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.3 }}
           >
             <BentoCard className="p-0 flex flex-col h-full overflow-hidden" delay={0.3 + (i * 0.1)}>
@@ -86,9 +90,9 @@ export function WebSolutions() {
                   )}
                 </div>
 
-                {/* Visit Site Overlay */}
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                  <div className="flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-bold uppercase tracking-[0.2em] text-[10px] translate-y-4 group-hover:translate-y-0 group-hover:bg-accent group-hover:text-black transition-all duration-500">
+                {/* Visit Site Overlay - More visible on touch devices */}
+                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 z-10">
+                  <div className="flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-bold uppercase tracking-[0.2em] text-[10px] translate-y-4 group-hover:translate-y-0 group-active:translate-y-0 group-hover:bg-accent group-active:bg-accent group-hover:text-black transition-all duration-500">
                     Visit Site <ExternalLink size={14} />
                   </div>
                 </div>

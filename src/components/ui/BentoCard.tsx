@@ -5,14 +5,16 @@ interface BentoCardProps {
   children: React.ReactNode;
   className?: string;
   delay?: number;
+  id?: string;
 }
 
-export function BentoCard({ children, className, delay = 0 }: BentoCardProps) {
+export function BentoCard({ children, className, delay = 0, id }: BentoCardProps) {
   return (
     <motion.div
+      id={id}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      whileHover={{ 
+      whileHover={{
         y: -4,
         scale: 1.01,
         transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }

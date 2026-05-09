@@ -8,7 +8,8 @@ export default defineConfig(({mode}) => {
   return {
     plugins: [react(), tailwindcss()],
     define: {
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      // API keys should not be exposed in the frontend.
+      // If needed, use a backend proxy or serverless functions.
     },
     resolve: {
       alias: {

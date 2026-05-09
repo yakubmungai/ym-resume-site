@@ -11,11 +11,11 @@ export function Hero() {
 
   return (
     <section id="hero" className="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[240px]">
-      <BentoCard className="md:col-span-2 md:row-span-2 p-8 md:p-12 flex flex-col justify-between relative !overflow-visible">
+      <BentoCard className="md:col-span-2 md:row-span-2 p-6 md:p-12 space-y-6 md:space-y-8 relative overflow-hidden backdrop-blur-xl bg-white/[0.03] border-white/10" delay={0.2}>
         <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
           <NeuralLattice />
         </div>
-        <div className="relative z-10 space-y-8 pt-12">
+        <div className="relative z-10 space-y-4 md:space-y-8 pt-6 md:pt-12">
 
           <motion.div 
             initial="hidden"
@@ -66,24 +66,24 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap gap-4 pt-4"
+            className="flex flex-row gap-3 md:gap-4 pt-2 md:pt-4 w-full sm:w-auto"
           >
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href={`mailto:${PERSONAL_INFO.email}`}
-              className="px-8 py-4 bg-white text-black font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white/90 transition-all shadow-[0_0_30px_rgba(255,255,255,0.15)] inline-block"
+              className="flex-1 sm:flex-initial px-4 md:px-8 py-3 md:py-4 bg-white text-black font-bold uppercase tracking-widest text-[10px] md:text-xs rounded-full hover:bg-white/90 transition-all shadow-[0_0_30px_rgba(255,255,255,0.15)] text-center"
             >
               Get in touch
             </motion.a>
-            <div className="relative">
+            <div className="relative flex-1 sm:flex-initial">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsResumeOpen(!isResumeOpen)}
-                className="flex items-center gap-2 px-8 py-4 bg-white/5 text-white font-bold uppercase tracking-widest text-xs rounded-full border border-white/10 hover:bg-white/10 transition-all"
+                className="w-full flex items-center justify-center gap-2 px-4 md:px-8 py-3 md:py-4 bg-white/5 text-white font-bold uppercase tracking-widest text-[10px] md:text-xs rounded-full border border-white/10 hover:bg-white/10 transition-all"
               >
-                View Resume <ChevronDown size={14} className={`transition-transform duration-300 ${isResumeOpen ? 'rotate-180' : ''}`} />
+                Resume <ChevronDown size={14} className={`transition-transform duration-300 ${isResumeOpen ? 'rotate-180' : ''}`} />
               </motion.button>
 
               <AnimatePresence>
@@ -138,23 +138,15 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          animate={{ 
-            y: [0, -10, 0],
-          }}
           transition={{ 
-            y: {
-              duration: 6, 
-              repeat: Infinity, 
-              ease: "easeInOut"
-            },
             opacity: { duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] },
             scale: { duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }
           }}
           viewport={{ once: true }}
           className="flex-grow overflow-hidden flex items-center justify-center pointer-events-none select-none relative scale-110 md:origin-bottom origin-center"
           style={{
-            maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)'
+            maskImage: 'linear-gradient(to bottom, black 95%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 95%, transparent 100%)'
           }}
         >
           <img
@@ -186,13 +178,13 @@ export function Hero() {
 
           {/* Integrated Social Links */}
           <div className="flex gap-4 pt-4 mt-2 border-t border-white/5 w-full justify-center">
-            <a href={PERSONAL_INFO.links.github} target="_blank" className="text-white/30 hover:text-white transition-colors group">
+            <a href={PERSONAL_INFO.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" className="text-white/30 hover:text-white transition-colors group">
               <Github size={18} className="group-hover:scale-110 transition-transform" />
             </a>
-            <a href={PERSONAL_INFO.links.linkedin} target="_blank" className="text-white/30 hover:text-white transition-colors group">
+            <a href={PERSONAL_INFO.links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" className="text-white/30 hover:text-white transition-colors group">
               <Linkedin size={18} className="group-hover:scale-110 transition-transform" />
             </a>
-            <a href={`mailto:${PERSONAL_INFO.email}`} className="text-white/30 hover:text-white transition-colors group">
+            <a href={`mailto:${PERSONAL_INFO.email}`} aria-label="Send Email" className="text-white/30 hover:text-white transition-colors group">
               <Mail size={18} className="group-hover:scale-110 transition-transform" />
             </a>
           </div>
