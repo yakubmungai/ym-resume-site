@@ -54,7 +54,7 @@ export function Navigation() {
                 >
                   <div className="p-2 space-y-1">
                     <a
-                      href={(PERSONAL_INFO as any).resumes.swe}
+                      href={PERSONAL_INFO.resumes.swe}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/10 transition-colors group/resume"
@@ -68,7 +68,7 @@ export function Navigation() {
                       </div>
                     </a>
                     <a
-                      href={(PERSONAL_INFO as any).resumes.ba}
+                      href={PERSONAL_INFO.resumes.ba}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/10 transition-colors group/resume"
@@ -140,7 +140,7 @@ export function Navigation() {
                 <div className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] px-2">Resumes</div>
                 <div className="grid grid-cols-1 gap-2">
                   <a
-                    href={(PERSONAL_INFO as any).resumes.swe}
+                    href={PERSONAL_INFO.resumes.swe}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
@@ -149,7 +149,7 @@ export function Navigation() {
                     <span className="text-xs font-bold uppercase tracking-wider">Software Engineering</span>
                   </a>
                   <a
-                    href={(PERSONAL_INFO as any).resumes.ba}
+                    href={PERSONAL_INFO.resumes.ba}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"

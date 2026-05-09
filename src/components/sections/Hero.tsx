@@ -56,7 +56,7 @@ export function Hero() {
                   >
                     <div className="p-2 space-y-1">
                       <a
-                        href={(PERSONAL_INFO as any).resumes.swe}
+                        href={PERSONAL_INFO.resumes.swe}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/10 transition-colors group/resume"
@@ -70,7 +70,7 @@ export function Hero() {
                         </div>
                       </a>
                       <a
-                        href={(PERSONAL_INFO as any).resumes.ba}
+                        href={PERSONAL_INFO.resumes.ba}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/10 transition-colors group/resume"

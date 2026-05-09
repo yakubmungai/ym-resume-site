@@ -1,12 +1,35 @@
 // Image Assets
 import pfpImage from '../assets/pfp_black_bg.png';
+
+export interface PersonalInfo {
+  name: string;
+  legalName: string;
+  role: string;
+  intro: string;
+  aliases: string[];
+  university: string;
+  graduation: string;
+  location: string;
+  email: string;
+  links: {
+    github: string;
+    linkedin: string;
+  };
+  bio: string;
+  sports: string;
+  food: string;
+  resumes: {
+    swe: string;
+    ba: string;
+  };
+}
 import headshotAIImage from '../assets/headshot_ai.png';
 import kosmosImage from '../assets/kosmos_launch.png';
 import alexgAutomatorImage from '../assets/alexg_automator.png';
 import portfolioPreviewImage from '../assets/portfolio_preview.png';
 import tanshaPreviewImage from '../assets/tansha_preview.png';
 
-export const PERSONAL_INFO = {
+export const PERSONAL_INFO: PersonalInfo = {
   name: "Jacob J. Mungai",
   legalName: "Yakub J. Mungai",
   role: "Aspiring Software Engineer",
@@ -24,8 +47,8 @@ export const PERSONAL_INFO = {
   sports: `Outside of the professional grind, I'm a big sports fan. Whether I'm analyzing the strategy of a UFC card, watching the NBA, or competing in NBA2K, I'm drawn to the discipline it takes to win.`,
   food: `I'm also a self-proclaimed foodie with a very specific weakness—if there's a ribeye or lobster mac and cheese on the menu, I'm there. Ultimately, I carry that same appetite for excellence into every project I touch.`,
   resumes: {
-    swe: "/resumes/Jacob_Mungai_SWE_Resume.pdf",
-    ba: "/resumes/Jacob_Mungai_BA_Resume.pdf"
+    swe: "/resumes/Yakub_Mungai_2026_SWE.pdf",
+    ba: "/resumes/Yakub_Mungai_2026_Resume_BA.pdf"
   }
 };
 
