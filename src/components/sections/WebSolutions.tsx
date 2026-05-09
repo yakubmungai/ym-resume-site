@@ -13,7 +13,7 @@ export function WebSolutions() {
       </div>
 
       {/* The Service Promo Card - Full Width Header */}
-      <BentoCard className="p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 bg-accent/5 border-accent/20" delay={0.2}>
+      <BentoCard className="p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 bg-accent/5 border-accent/20" delay={0.2}>
         <div className="flex flex-col md:flex-row items-start md:items-center gap-8 max-w-4xl">
           <div className="w-16 h-16 shrink-0 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
             <Code2 size={32} />

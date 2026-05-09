@@ -10,8 +10,8 @@ export function Hero() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   return (
-    <section id="hero" className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[240px]">
-      <BentoCard className="md:col-span-2 md:row-span-2 p-12 flex flex-col justify-between relative !overflow-visible">
+    <section id="hero" className="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[240px]">
+      <BentoCard className="md:col-span-2 md:row-span-2 p-8 md:p-12 flex flex-col justify-between relative !overflow-visible">
         <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
           <NeuralLattice />
         </div>
@@ -19,7 +19,7 @@ export function Hero() {
 
           <div className="space-y-4">
             <div>
-              <h1 className="text-5xl md:text-8xl font-bold font-display tracking-tighter leading-[0.9]">
+              <h1 className="text-4xl sm:text-5xl md:text-8xl font-bold font-display tracking-tighter leading-[0.9]">
                 {PERSONAL_INFO.name}
               </h1>
             </div>
@@ -32,14 +32,14 @@ export function Hero() {
           </div>
 
           <div className="flex flex-wrap gap-4 pt-4">
-            <a 
+            <a
               href={`mailto:${PERSONAL_INFO.email}`}
               className="px-8 py-4 bg-white text-black font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white/90 transition-all shadow-[0_0_30px_rgba(255,255,255,0.15)] inline-block"
             >
               Get in touch
             </a>
             <div className="relative">
-              <button 
+              <button
                 onClick={() => setIsResumeOpen(!isResumeOpen)}
                 className="flex items-center gap-2 px-8 py-4 bg-white/5 text-white font-bold uppercase tracking-widest text-xs rounded-full border border-white/10 hover:bg-white/10 transition-all"
               >
@@ -100,7 +100,7 @@ export function Hero() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="flex-grow overflow-hidden flex items-center justify-center pointer-events-none select-none relative scale-125 md:scale-150 origin-bottom"
+          className="flex-grow overflow-hidden flex items-center justify-center pointer-events-none select-none relative scale-110 md:origin-bottom origin-center"
           style={{
             maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
             WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)'
@@ -115,15 +115,15 @@ export function Hero() {
 
         {/* Minimal Info overlay/caption - Centered */}
         <div className="mt-8 space-y-3 px-2 flex flex-col items-center">
-          <div className="flex items-center gap-2 text-white/30">
+          <div className="flex items-center gap-2 text-white/40 select-none">
             <GraduationCap size={14} />
             <span className="text-[10px] font-bold uppercase tracking-[0.2em]">{PERSONAL_INFO.university} CS '25</span>
           </div>
-          <div className="flex items-center gap-2 text-white/30">
+          <div className="flex items-center gap-2 text-white/40 select-none">
             <Laptop size={14} />
             <span className="text-[10px] font-bold uppercase tracking-[0.2em]">C++ · Python · SQL</span>
           </div>
-          <div className="flex items-center gap-2 text-white/30">
+          <div className="flex items-center gap-2 text-white/40 select-none">
             <Award size={14} />
             <span className="text-[10px] font-bold uppercase tracking-[0.2em]">UWC Davis Scholar</span>
           </div>

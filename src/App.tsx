@@ -18,7 +18,7 @@ function App() {
       
       <Navigation />
 
-      <main className="max-w-[1400px] mx-auto px-6 pt-32 pb-24 space-y-24 relative z-10">
+      <main className="max-w-[1400px] mx-auto px-6 pt-24 md:pt-32 pb-24 space-y-16 md:space-y-24 relative z-10">
         <Hero />
         <Projects />
         <WebSolutions />
