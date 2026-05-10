@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Github, Linkedin, Mail, GraduationCap, Laptop, Award, FileText, BarChart3, ChevronDown } from 'lucide-react';
 import { BentoCard } from '../ui/BentoCard';
@@ -9,9 +9,30 @@ import pfpImage from '../../assets/pfp_black_bg.png';
 export function Hero() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
+  // Close dropdown on scroll or click outside
+  useEffect(() => {
+    const handleScroll = () => setIsResumeOpen(false);
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target && target.closest && !target.closest('.resume-dropdown-container')) {
+        setIsResumeOpen(false);
+      }
+    };
+
+    if (isResumeOpen) {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      window.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isResumeOpen]);
+
   return (
     <section id="hero" className="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[240px]">
-      <BentoCard className={`md:col-span-2 md:row-span-2 p-6 md:p-12 space-y-6 md:space-y-8 relative !overflow-visible backdrop-blur-xl bg-white/[0.03] border-white/10 ${isResumeOpen ? 'z-[70]' : 'z-10'}`} delay={0.2}>
+      <BentoCard className={`md:col-span-2 md:row-span-2 p-6 md:p-12 space-y-6 md:space-y-8 relative !overflow-visible backdrop-blur-xl bg-white/[0.03] border-white/10 ${isResumeOpen ? 'z-40' : 'z-10'}`} delay={0.2}>
         <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
           <NeuralLattice />
         </div>
@@ -76,7 +97,7 @@ export function Hero() {
             >
               Get in touch
             </motion.a>
-            <div className="relative flex-1 sm:flex-initial">
+            <div className="relative flex-1 sm:flex-initial resume-dropdown-container">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

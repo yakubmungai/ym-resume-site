@@ -79,12 +79,13 @@ function Lattice({ count = 2000 }) {
 }
 
 export default function NeuralLattice() {
-  const [pointCount, setPointCount] = useState(2000);
+  const [pointCount] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768 ? 1000 : 2000;
+    }
+    return 2000;
+  });
 
-  useEffect(() => {
-    const isMobile = window.innerWidth < 768;
-    setPointCount(isMobile ? 1000 : 2000);
-  }, []);
 
   return (
     <div className="absolute inset-0 z-0 pointer-events-none opacity-60">

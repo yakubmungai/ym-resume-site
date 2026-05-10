@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="min-h-screen bg-black text-white selection:bg-white selection:text-black">
       {/* Background Noise Texture */}
-      <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[100] noise-bg" />
+
 
       <Navigation />
 
