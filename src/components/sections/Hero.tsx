@@ -39,7 +39,7 @@ export function Hero() {
         <div className="relative z-10 space-y-4 md:space-y-8 pt-6 md:pt-12">
 
           <motion.div 
-            initial="hidden"
+            initial={typeof window !== 'undefined' && window.innerWidth < 768 ? "visible" : "hidden"}
             animate="visible"
             variants={{
               hidden: { opacity: 0 },
@@ -84,7 +84,7 @@ export function Hero() {
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={typeof window !== 'undefined' && window.innerWidth < 768 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-row gap-3 md:gap-4 pt-2 md:pt-4 w-full sm:w-auto"
@@ -157,9 +157,9 @@ export function Hero() {
       {/* Profile Photo & Minimal Info - Merged with Background */}
       <div className="md:col-span-1 md:row-span-2 flex flex-col">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ 
+          initial={typeof window !== 'undefined' && window.innerWidth < 768 ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+          whileInView={typeof window !== 'undefined' && window.innerWidth < 768 ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
+          transition={typeof window !== 'undefined' && window.innerWidth < 768 ? { duration: 0 } : { 
             opacity: { duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] },
             scale: { duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }
           }}
