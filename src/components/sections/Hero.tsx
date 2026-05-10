@@ -32,7 +32,7 @@ export function Hero() {
 
   return (
     <section id="hero" className="grid grid-cols-1 md:grid-cols-3 gap-6 md:auto-rows-[240px]">
-      <BentoCard className={`md:col-span-2 md:row-span-2 p-6 md:p-12 space-y-6 md:space-y-8 relative !overflow-visible backdrop-blur-xl bg-white/[0.03] border-white/10 ${isResumeOpen ? 'z-40' : 'z-10'}`} delay={0.2}>
+      <BentoCard className={`md:col-span-2 md:row-span-2 p-6 md:p-12 space-y-6 md:space-y-8 relative !overflow-visible backdrop-blur-md md:backdrop-blur-xl bg-white/[0.03] border-white/10 z-20`} delay={0.2}>
         <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
           <NeuralLattice />
         </div>

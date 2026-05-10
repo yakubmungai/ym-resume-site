@@ -81,7 +81,7 @@ function Lattice({ count = 2000 }) {
 export default function NeuralLattice() {
   const [pointCount] = useState(() => {
     if (typeof window !== 'undefined') {
-      return window.innerWidth < 768 ? 1000 : 2000;
+      return window.innerWidth < 768 ? 500 : 2000;
     }
     return 2000;
   });

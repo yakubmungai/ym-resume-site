@@ -67,7 +67,7 @@ export function WebSolutions() {
                   <img 
                     src={(project as any).image} 
                     alt={project.title} 
-                    className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
+                    className="w-full h-full object-cover grayscale-0 opacity-100 md:grayscale md:opacity-50 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center opacity-10 group-hover:scale-110 transition-transform duration-700">

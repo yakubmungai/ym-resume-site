@@ -14,13 +14,14 @@ export function BentoCard({ children, className, delay = 0, id }: BentoCardProps
       id={id}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      whileHover={{
+      whileHover={typeof window !== 'undefined' && window.innerWidth >= 768 ? {
         y: -4,
         scale: 1.01,
         transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
-      }}
-      viewport={{ once: true }}
+      } : {}}
+      viewport={{ once: true, margin: "-10%" }}
       transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
+
       className={cn("bento-card group", className)}
     >
       {children}
