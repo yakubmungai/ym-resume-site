@@ -87,7 +87,7 @@ export default function NeuralLattice() {
   });
 
 
-  if (typeof window !== 'undefined' && window.innerWidth < 768) return null;
+
 
   return (
     <div className="absolute inset-0 z-0 pointer-events-none opacity-60">
