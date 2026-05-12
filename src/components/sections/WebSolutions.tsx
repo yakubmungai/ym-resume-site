@@ -2,8 +2,11 @@ import { motion } from 'motion/react';
 import { Code2, Globe, ExternalLink, ArrowRight } from 'lucide-react';
 import { BentoCard } from '../ui/BentoCard';
 import { WEB_SHOWCASE, PERSONAL_INFO } from '../../data/portfolio';
+import { useLanguage } from '../../context/LanguageContext';
 
 export function WebSolutions() {
+  const { t } = useLanguage();
+
   return (
     <section id="web" className="space-y-8 pt-12">
       <motion.div 
@@ -13,7 +16,7 @@ export function WebSolutions() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="flex items-center gap-4"
       >
-        <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight uppercase">Web Solutions</h2>
+        <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight uppercase">{t('web.title')}</h2>
         <motion.div 
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
@@ -21,7 +24,7 @@ export function WebSolutions() {
           transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="flex-grow h-[1px] bg-white/5 origin-left" 
         />
-        <span className="text-[10px] font-bold opacity-20 tracking-widest">SECTION 02</span>
+        <span className="text-[10px] font-bold opacity-20 tracking-widest">{t('web.section')}</span>
       </motion.div>
 
       {/* The Service Promo Card - Full Width Header */}
@@ -31,9 +34,9 @@ export function WebSolutions() {
             <Code2 size={32} />
           </div>
           <div className="space-y-4">
-            <h3 className="text-3xl md:text-4xl font-bold font-display leading-tight">Need a high-performance website?</h3>
+            <h3 className="text-3xl md:text-4xl font-bold font-display leading-tight">{t('web.promo_h3')}</h3>
             <p className="text-white/60 font-light leading-relaxed max-w-2xl">
-              I build lightning-fast, visually stunning web experiences using modern engineering practices for rapid delivery. Currently available for select freelance projects while I pursue a full-time engineering role.
+              {t('web.promo_p')}
             </p>
           </div>
         </div>
@@ -43,9 +46,19 @@ export function WebSolutions() {
           href={`mailto:${PERSONAL_INFO.email}`}
           className="group flex items-center gap-3 px-8 py-4 bg-accent text-black font-bold uppercase tracking-[0.2em] text-[12px] rounded-xl hover:bg-accent/90 transition-all shrink-0"
         >
-          Get Started <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+          {t('web.cta')} <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
         </motion.a>
       </BentoCard>
+
+      <motion.p 
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="text-white/40 text-[12px] font-medium uppercase tracking-[0.2em] pt-4"
+      >
+        {t('web.subtitle')}
+      </motion.p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Web Project Showcase */}
@@ -85,7 +98,7 @@ export function WebSolutions() {
                   {(project as any).isLive && (
                     <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-accent/20 backdrop-blur-md border border-accent/20 text-[8px] font-bold uppercase tracking-widest text-accent">
                       <span className="w-1 h-1 rounded-full bg-accent animate-pulse" />
-                      Live Project
+                      {t('projects.live')}
                     </div>
                   )}
                 </div>
@@ -93,7 +106,7 @@ export function WebSolutions() {
                 {/* Visit Site Overlay - More visible on touch devices */}
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 z-10">
                   <div className="flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-bold uppercase tracking-[0.2em] text-[10px] translate-y-4 group-hover:translate-y-0 group-active:translate-y-0 group-hover:bg-accent group-active:bg-accent group-hover:text-black transition-all duration-500">
-                    Visit Site <ExternalLink size={14} />
+                    {t('projects.visit')} <ExternalLink size={14} />
                   </div>
                 </div>
               </div>

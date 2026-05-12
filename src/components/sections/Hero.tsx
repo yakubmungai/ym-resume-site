@@ -5,9 +5,11 @@ import { BentoCard } from '../ui/BentoCard';
 import NeuralLattice from '../ui/NeuralLattice';
 import { PERSONAL_INFO } from '../../data/portfolio';
 import pfpImage from '../../assets/pfp_black_bg.png';
+import { useLanguage } from '../../context/LanguageContext';
 
 export function Hero() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
+  const { t } = useLanguage();
 
   // Close dropdown on scroll or click outside
   useEffect(() => {
@@ -70,7 +72,7 @@ export function Hero() {
               }}
               className="text-xl md:text-2xl text-accent font-bold font-display tracking-tight"
             >
-              {PERSONAL_INFO.role}
+              {t('hero.role')}
             </motion.h2>
             <motion.p 
               variants={{
@@ -79,7 +81,7 @@ export function Hero() {
               }}
               className="text-sm md:text-lg text-white/60 font-light max-w-xl leading-relaxed"
             >
-              {PERSONAL_INFO.intro}
+              {t('hero.intro')}
             </motion.p>
           </motion.div>
 
@@ -95,7 +97,7 @@ export function Hero() {
               href={`mailto:${PERSONAL_INFO.email}`}
               className="flex-1 sm:flex-initial px-4 md:px-8 py-3 md:py-4 bg-white text-black font-bold uppercase tracking-widest text-[10px] md:text-xs rounded-full hover:bg-white/90 transition-all shadow-[0_0_30px_rgba(255,255,255,0.15)] text-center"
             >
-              Get in touch
+              {t('hero.cta')}
             </motion.a>
             <div className="relative flex-1 sm:flex-initial resume-dropdown-container">
               <motion.button
@@ -104,7 +106,7 @@ export function Hero() {
                 onClick={() => setIsResumeOpen(!isResumeOpen)}
                 className="w-full flex items-center justify-center gap-2 px-4 md:px-8 py-3 md:py-4 bg-white/5 text-white font-bold uppercase tracking-widest text-[10px] md:text-xs rounded-full border border-white/10 hover:bg-white/10 transition-all"
               >
-                Resume <ChevronDown size={14} className={`transition-transform duration-300 ${isResumeOpen ? 'rotate-180' : ''}`} />
+                {t('nav.resume')} <ChevronDown size={14} className={`transition-transform duration-300 ${isResumeOpen ? 'rotate-180' : ''}`} />
               </motion.button>
 
               <AnimatePresence>
@@ -126,8 +128,8 @@ export function Hero() {
                           <FileText size={18} />
                         </div>
                         <div className="flex flex-col">
-                          <span className="text-[11px] font-bold text-white uppercase tracking-wider">Software Engineering</span>
-                          <span className="text-[9px] text-white/40 uppercase tracking-widest">Technical Focus</span>
+                          <span className="text-[11px] font-bold text-white uppercase tracking-wider">{t('nav.swe')}</span>
+                          <span className="text-[9px] text-white/40 uppercase tracking-widest">{t('nav.eng_focus')}</span>
                         </div>
                       </a>
                       <a
@@ -140,8 +142,8 @@ export function Hero() {
                           <BarChart3 size={18} />
                         </div>
                         <div className="flex flex-col">
-                          <span className="text-[11px] font-bold text-white uppercase tracking-wider">Business Analysis</span>
-                          <span className="text-[9px] text-white/40 uppercase tracking-widest">Strategy Focus</span>
+                          <span className="text-[11px] font-bold text-white uppercase tracking-wider">{t('nav.ba')}</span>
+                          <span className="text-[9px] text-white/40 uppercase tracking-widest">{t('nav.strat_focus')}</span>
                         </div>
                       </a>
                     </div>

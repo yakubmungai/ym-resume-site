@@ -2,8 +2,11 @@ import { motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 import { BentoCard } from '../ui/BentoCard';
 import { PROJECTS } from '../../data/portfolio';
+import { useLanguage } from '../../context/LanguageContext';
 
 export function Projects() {
+  const { t } = useLanguage();
+
   return (
     <section id="work" className="space-y-8 pt-12">
       <motion.div 
@@ -13,7 +16,7 @@ export function Projects() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="flex items-center gap-4"
       >
-        <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight uppercase">Projects</h2>
+        <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight uppercase">{t('projects.title')}</h2>
         <motion.div 
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
@@ -21,7 +24,7 @@ export function Projects() {
           transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="flex-grow h-[1px] bg-white/5 origin-left" 
         />
-        <span className="text-[10px] font-bold opacity-20 tracking-widest">SECTION 01</span>
+        <span className="text-[10px] font-bold opacity-20 tracking-widest">{t('projects.section')}</span>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

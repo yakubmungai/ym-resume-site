@@ -2,10 +2,13 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Download, ChevronDown, FileText, BarChart3, Menu, X } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolio';
+import { useLanguage } from '../../context/LanguageContext';
+import { LanguageToggle } from '../ui/LanguageToggle';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <motion.header
@@ -14,33 +17,36 @@ export function Navigation() {
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex flex-col md:flex-row items-center gap-2 px-3 py-2 rounded-3xl md:rounded-full glass w-[calc(100%-2rem)] md:w-auto"
     >
-      <div className="flex items-center justify-between w-full md:w-auto gap-2">
-        <nav className="hidden md:flex items-center gap-1 text-[13px] font-medium px-2">
-          <a href="#hero" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition-colors">Home</a>
-          <a href="#work" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition-colors">Projects</a>
-          <a href="#web" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition-colors">Web</a>
-          <a href="#about" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition-colors">About</a>
+      <div className="flex items-center justify-between w-full md:w-auto gap-1 md:gap-2">
+        <nav className="hidden md:flex items-center gap-0.5 text-[13px] font-medium px-2">
+          <a href="#hero" className="px-3 py-1.5 rounded-full hover:bg-white/10 transition-colors">{t('nav.home')}</a>
+          <a href="#work" className="px-3 py-1.5 rounded-full hover:bg-white/10 transition-colors">{t('nav.projects')}</a>
+          <a href="#web" className="px-3 py-1.5 rounded-full hover:bg-white/10 transition-colors">{t('nav.web')}</a>
+          <a href="#about" className="px-3 py-1.5 rounded-full hover:bg-white/10 transition-colors">{t('nav.about')}</a>
         </nav>
 
         {/* Mobile Menu Button */}
-        <button 
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-          className="md:hidden p-2 hover:bg-white/10 rounded-full transition-colors"
-        >
-          {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <div className="flex items-center gap-1 md:hidden">
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            className="p-1.5 hover:bg-white/10 rounded-full transition-colors"
+          >
+            {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
+          <LanguageToggle />
+        </div>
 
         <div className="hidden md:block w-[1px] h-4 bg-white/20 mx-1" />
-        <div className="flex items-center gap-2 relative">
+        <div className="flex items-center gap-1.5 md:gap-2 relative">
           <div className="relative">
             <button
               onMouseEnter={() => setIsOpen(true)}
               onMouseLeave={() => setIsOpen(false)}
               onClick={() => setIsOpen(!isOpen)}
-              className="hidden md:flex items-center gap-1.5 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest bg-white/10 hover:bg-white/20 border border-white/10 rounded-full transition-all"
+              className="hidden md:flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest bg-white/10 hover:bg-white/20 border border-white/10 rounded-full transition-all"
             >
-              <Download size={12} /> Resume <ChevronDown size={12} className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+              <Download size={12} /> {t('nav.resume')} <ChevronDown size={12} className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
             </button>
 
             <AnimatePresence>
@@ -64,8 +70,8 @@ export function Navigation() {
                         <FileText size={16} />
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-[11px] font-bold text-white uppercase tracking-wider">Software Engineering</span>
-                        <span className="text-[9px] text-white/40 uppercase tracking-widest">Engineering Focus</span>
+                        <span className="text-[11px] font-bold text-white uppercase tracking-wider">{t('nav.swe')}</span>
+                        <span className="text-[9px] text-white/40 uppercase tracking-widest">{t('nav.eng_focus')}</span>
                       </div>
                     </a>
                     <a
@@ -78,8 +84,8 @@ export function Navigation() {
                         <BarChart3 size={16} />
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-[11px] font-bold text-white uppercase tracking-wider">Business Analysis</span>
-                        <span className="text-[9px] text-white/40 uppercase tracking-widest">Strategy Focus</span>
+                        <span className="text-[11px] font-bold text-white uppercase tracking-wider">{t('nav.ba')}</span>
+                        <span className="text-[9px] text-white/40 uppercase tracking-widest">{t('nav.strat_focus')}</span>
                       </div>
                     </a>
                   </div>
@@ -91,10 +97,14 @@ export function Navigation() {
           <a
             href="#contact"
             aria-label="Hire Me"
-            className="px-4 py-1.5 text-[13px] font-semibold bg-white text-black rounded-full hover:bg-white/90 transition-all shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_25px_rgba(255,255,255,0.25)] hover:scale-105 active:scale-95 shrink-0"
+            className="px-3 md:px-4 py-1.5 text-[11px] md:text-[13px] font-semibold bg-white text-black rounded-full hover:bg-white/90 transition-all shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_25px_rgba(255,255,255,0.25)] hover:scale-105 active:scale-95 shrink-0"
           >
-            Hire Me
+            {t('nav.hire')}
           </a>
+
+          <div className="hidden md:flex items-center">
+            <LanguageToggle />
+          </div>
         </div>
       </div>
 
@@ -113,32 +123,32 @@ export function Navigation() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-4 py-3 rounded-xl hover:bg-white/5 transition-colors text-sm font-medium"
               >
-                Home
+                {t('nav.home')}
               </a>
               <a 
                 href="#work" 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-4 py-3 rounded-xl hover:bg-white/5 transition-colors text-sm font-medium"
               >
-                Projects
+                {t('nav.projects')}
               </a>
               <a 
                 href="#web" 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-4 py-3 rounded-xl hover:bg-white/5 transition-colors text-sm font-medium"
               >
-                Web Solutions
+                {t('nav.web')}
               </a>
               <a 
                 href="#about" 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="px-4 py-3 rounded-xl hover:bg-white/5 transition-colors text-sm font-medium"
               >
-                About
+                {t('nav.about')}
               </a>
               
               <div className="p-2 pt-4 space-y-2">
-                <div className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] px-2">Resumes</div>
+                <div className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] px-2">{t('nav.resume')}</div>
                 <div className="grid grid-cols-1 gap-2">
                   <a
                     href={PERSONAL_INFO.resumes.swe}
@@ -147,7 +157,7 @@ export function Navigation() {
                     className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
                   >
                     <FileText size={16} className="text-accent" />
-                    <span className="text-xs font-bold uppercase tracking-wider">Software Engineering</span>
+                    <span className="text-xs font-bold uppercase tracking-wider">{t('nav.swe')}</span>
                   </a>
                   <a
                     href={PERSONAL_INFO.resumes.ba}
@@ -156,7 +166,7 @@ export function Navigation() {
                     className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
                   >
                     <BarChart3 size={16} className="text-blue-400" />
-                    <span className="text-xs font-bold uppercase tracking-wider">Business Analysis</span>
+                    <span className="text-xs font-bold uppercase tracking-wider">{t('nav.ba')}</span>
                   </a>
                 </div>
               </div>
