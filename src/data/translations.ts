@@ -21,7 +21,7 @@ export const translations = {
       title: "Web Solutions",
       section: "SECTION 02",
       promo_h3: "Need a high-performance website?",
-      promo_p: "I build lightning-fast, visually stunning web experiences using modern engineering practices for rapid delivery. Currently available for select freelance projects while I pursue a full-time engineering role.",
+      promo_p: "I specialize in engineering high-performance websites and digital solutions under the moniker jacs.ai. Leveraging modern frameworks and optimized delivery pipelines, I build lightning-fast, premium experiences for select freelance clients.",
       cta: "Get Started",
       subtitle: "Take a look at my previous web projects below."
     },
@@ -73,7 +73,7 @@ export const translations = {
       title: "Suluhisho za Tovuti",
       section: "SEHEMU YA 02",
       promo_h3: "Unahitaji tovuti ya kisasa?",
-      promo_p: "Ninajenga tovuti zenye kasi ya ajabu na mwonekano wa kuvutia kwa kutumia teknolojia za kisasa. Nipo tayari kwa miradi mipya ya kutengeneza tovuti wakati nikiendelea na safari yangu ya kitaaluma.",
+      promo_p: "Ninabobea katika kutengeneza tovuti zenye kasi ya juu na suluhisho za kidijitali chini ya jina la msanidi jacs.ai. Nikitumia mifumo ya kisasa na njia za uwasilishaji zilizoboreshwa, ninajenga tovuti zenye kasi ya ajabu na mwonekano wa kuvutia kwa wateja maalum.",
       cta: "Tuanze Sasa",
       subtitle: "Angalia baadhi ya miradi yangu ya tovuti hapa chini."
     },

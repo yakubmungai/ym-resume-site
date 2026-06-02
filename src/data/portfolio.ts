@@ -28,6 +28,7 @@ import kosmosImage from '../assets/kosmos_launch.png';
 import alexgAutomatorImage from '../assets/alexg_automator.png';
 import portfolioPreviewImage from '../assets/portfolio_preview.png';
 import tanshaPreviewImage from '../assets/tansha_preview.png';
+import craftedByDnaPreviewImage from '../assets/craftedbydna_preview.png';
 
 export const PERSONAL_INFO: PersonalInfo = {
   name: "Jacob J. Mungai",
@@ -83,6 +84,16 @@ export const PROJECTS = [
 ];
 
 export const WEB_SHOWCASE = [
+  {
+    id: 6,
+    title: "Crafted by DNA",
+    category: "Creative Director & Filmmaker Portfolio",
+    description: "A premium bespoke portfolio design engineered for an experienced creative director and filmmaker. Features immersive animations, high-fidelity media presentation, and optimal performance.",
+    tags: ["Next.js", "Tailwind", "Framer Motion"],
+    href: "https://craftedbydna.com",
+    isLive: true,
+    image: craftedByDnaPreviewImage
+  },
   {
     id: 5,
     title: "Tanzania Sharing Association",

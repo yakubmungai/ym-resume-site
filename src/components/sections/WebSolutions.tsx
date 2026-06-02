@@ -60,7 +60,7 @@ export function WebSolutions() {
         {t('web.subtitle')}
       </motion.p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Web Project Showcase */}
         {WEB_SHOWCASE.map((project, i) => (
           <motion.a
