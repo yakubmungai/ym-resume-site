@@ -48,8 +48,8 @@ export const PERSONAL_INFO: PersonalInfo = {
   sports: `Outside of the professional grind, I'm a big sports fan. Whether I'm analyzing the strategy of a UFC card, watching the NBA, or competing in NBA2K, I'm drawn to the discipline it takes to win.`,
   food: `I'm also a self-proclaimed foodie with a very specific weakness—if there's a ribeye or lobster mac and cheese on the menu, I'm there. Ultimately, I carry that same appetite for excellence into every project I touch.`,
   resumes: {
-    swe: "/resumes/Yakub_Mungai_2026_SWE.pdf",
-    ba: "/resumes/Yakub_Mungai_2026_Resume_BA.pdf"
+    swe: "/resumes/Yakub_Mungai_2026_SWE_Resume.pdf",
+    ba: "/resumes/Yakub_Mungai_2026_BA_Resume.pdf"
   }
 };
 
