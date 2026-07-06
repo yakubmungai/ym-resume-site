@@ -61,7 +61,8 @@ export const PROJECTS = [
     description: "An AI-powered Discord bot that transforms casual photos into polished professional headshots. Integrates Google Gemini AI to apply DSLR-quality lighting and enhance image clarity asynchronously.",
     image: headshotAIImage,
     href: "https://github.com/yakubmungai/Discord-Headshot-Bot",
-    size: "small"
+    size: "small",
+    hidden: true
   },
   {
     id: 2,

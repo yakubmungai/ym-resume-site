@@ -3,9 +3,10 @@ import { ArrowUpRight } from 'lucide-react';
 import { BentoCard } from '../ui/BentoCard';
 import { PROJECTS } from '../../data/portfolio';
 import { useLanguage } from '../../context/LanguageContext';
-
 export function Projects() {
   const { t } = useLanguage();
+  const visibleProjects = PROJECTS.filter(project => !project.hidden);
+  const gridColsClass = visibleProjects.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3';
 
   return (
     <section id="work" className="space-y-8 pt-12">
@@ -27,8 +28,8 @@ export function Projects() {
         <span className="text-[10px] font-bold opacity-20 tracking-widest">{t('projects.section')}</span>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {PROJECTS.map((project, i) => (
+      <div className={`grid grid-cols-1 ${gridColsClass} gap-4`}>
+        {visibleProjects.map((project, i) => (
           <BentoCard 
             key={project.id} 
             className="p-0 group flex flex-col h-full"
