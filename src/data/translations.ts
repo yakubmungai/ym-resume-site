@@ -30,7 +30,8 @@ export const translations = {
       section: "SECTION 01",
       visit: "Visit Site",
       live: "Live Project",
-      view_all: "View all on GitHub"
+      view_all: "View all on GitHub",
+      private: "Private"
     },
     about: {
       title: "About Me",
@@ -82,7 +83,8 @@ export const translations = {
       section: "SEHEMU YA 01",
       visit: "Tembelea",
       live: "Ipo Hewani",
-      view_all: "Ona zote kwenye GitHub"
+      view_all: "Ona zote kwenye GitHub",
+      private: "Binafsi"
     },
     about: {
       title: "Kuhusu Mimi",

@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Lock } from 'lucide-react';
 import { BentoCard } from '../ui/BentoCard';
 import { PROJECTS } from '../../data/portfolio';
 import { useLanguage } from '../../context/LanguageContext';
@@ -46,17 +46,24 @@ export function Projects() {
               <div>
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-lg font-bold font-display leading-tight">{project.title}</h3>
-                  <motion.a 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    href={project.href} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    aria-label={`View ${project.title} on GitHub`}
-                    className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all shrink-0"
-                  >
-                    <ArrowUpRight size={14} />
-                  </motion.a>
+                  {project.href ? (
+                    <motion.a
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      href={project.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`View ${project.title} on GitHub`}
+                      className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all shrink-0"
+                    >
+                      <ArrowUpRight size={14} />
+                    </motion.a>
+                  ) : (
+                    <span className="h-8 px-3 rounded-full border border-white/10 flex items-center gap-1.5 text-[10px] font-bold tracking-widest uppercase text-white/40 shrink-0">
+                      <Lock size={10} />
+                      {t('projects.private')}
+                    </span>
+                  )}
                 </div>
                 <p className="text-white/40 text-[12px] font-light leading-relaxed line-clamp-3">{project.description}</p>
               </div>

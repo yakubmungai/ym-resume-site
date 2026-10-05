@@ -25,7 +25,7 @@ export interface PersonalInfo {
 }
 import headshotAIImage from '../assets/headshot_ai.png';
 import kosmosImage from '../assets/kosmos_launch.png';
-import alexgAutomatorImage from '../assets/alexg_automator.png';
+import macroIqImage from '../assets/macroiq_logo.png';
 import portfolioPreviewImage from '../assets/portfolio_preview.png';
 import tanshaPreviewImage from '../assets/tansha_preview.png';
 import craftedByDnaPreviewImage from '../assets/craftedbydna_preview.png';
@@ -75,11 +75,12 @@ export const PROJECTS = [
   },
   {
     id: 3,
-    title: "AlexG Automator",
-    category: "FinTech & Automation",
-    description: "A Python-based algorithmic trading system automating the 'Set and Forget' strategy. Integrates with MetaTrader 5 to identify market zones and execute trades based on strict confluence scores.",
-    image: alexgAutomatorImage,
-    href: "https://github.com/yakubmungai/fx-alex",
+    title: "Macro iQ",
+    category: "HealthTech & Mobile AI",
+    description: "An AI macro coach for iOS. Log meals by photo, barcode, text or voice, with targets set by a deterministic engine rather than a guess. Expo/React Native app backed by a live Node, Express and MongoDB API.",
+    image: macroIqImage,
+    // Private repo: no public link until macroiq.app / the App Store listing is live.
+    href: undefined,
     size: "small"
   },
 ];
